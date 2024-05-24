@@ -27,9 +27,9 @@ This module provides functionalities to build and save a resume in HTML format.
 * **ConcatText:** This class inherits from `Text` and is used to concatenate multiple text elements. It takes variable number of arguments of type `StrLike`.
 
 * **SectionEntry:** This class represents an entry in a resume section. It has the following attributes:
-    * `title` (OptionalStrLike): The title of the entry.
+    * `title` (OptionalStrLike): The title of the entry, this would be the company name.
     * `caption` (OptionalStrLike): A caption for the entry (e.g., job title).
-    * `location` (OptionalStrLike): The location of the entry (e.g., company name).
+    * `location` (OptionalStrLike): The location of the entry (e.g., Boston, MA).
     * `dates` (OptionalStrLike): The dates associated with the entry (e.g., employment dates).
     * `description` (OptionalStrLike): A description of the entry.
 
