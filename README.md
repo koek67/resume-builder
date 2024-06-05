@@ -10,7 +10,7 @@ See my resume definition [resume.py](./resume.py) and its output [resume.pdf](./
 
 ## Installation
 
-The entire library is a single python file `resume_builder.py`. Download this file
+The entire library is a single python file `resume_builder.py`. Download this file.
 
 ## Usage
 
