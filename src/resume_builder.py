@@ -383,8 +383,9 @@ class Resume:
             "--output",
             type=str,
             dest="output_file",
-            required=True,
+            required=False,
             help="Output HTML file name.",
+            default=f"{self.contact_info.name}_resume.html",
         )
         args = parser.parse_args()
         self.save(args.output_file)
