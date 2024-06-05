@@ -10,9 +10,30 @@ See my resume definition [resume.py](./resume.py) and its output [resume.pdf](./
 
 ## Installation
 
-The entire library is a single python file `resume_builder.py`. Download this file.
+3 Ways to do it:
+
+### Devcontainer method
+
+1. Install [Docker](https://www.docker.com/) & [VS Code](https://code.visualstudio.com/)
+2. Install [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VS Code
+3. Clone this repo & reopen it in dev container
+4. Proceed to [Usage section](#usage)
+
+### Python method
+
+1. Install [Python](https://www.python.org/downloads/)
+2. Download [`resume.py`](src/resume.py) & [`resume_builder.py`](src/resume_builder.py)
+3. Proceed to [Usage section](#usage)
+
+### Rye method
+
+1. Install [Rye](https://rye.astral.sh/)
+2. Clone this repo
+3. Proceed to [Usage section](#usage)
 
 ## Usage
+
+Edit [`resume.py`](src/resume.py) file with your details.
 
 To generate a resume:
 
@@ -20,14 +41,20 @@ To generate a resume:
 python resume.py --output resume.html
 ```
 
+or
+
+```bash
+rye run resume
+```
+
 To convert to a PDF, open in a web browser and Print as PDF. The resume generated is optimized for PDF.
 In the browser, you can zoom in/out your PDF to make it fit to a page better.
 
 ## Resume Definition
 
-Resumes are defined in Python files like `resume.py`. These files provide the best examples for how to configure a Resume.
+Resumes are defined in Python files like [`resume.py`](src/resume.py). These files provide the best examples for how to configure a Resume.
 
-For more details, see `resume_builder.py` and reference.md.
+For more details, see [`resume_builder.py`](src/resume_builder.py) and [Reference doc](reference.md)
 
 ## Motivation
 
