@@ -1,6 +1,16 @@
 # Koushik Krishnan's Resume
 
-from resume_builder import Resume, Section, SectionEntry, ContactInfo, ConcatText, ItalicsText, UnderlinedText, LinkText, BulletedList
+from resume_builder import (
+    BulletedList,
+    ConcatText,
+    ContactInfo,
+    ItalicsText,
+    LinkText,
+    Resume,
+    Section,
+    SectionEntry,
+    UnderlinedText,
+)
 
 resume = Resume(
     contact_info=ContactInfo(
@@ -17,7 +27,7 @@ resume = Resume(
         ],
         tag_line="Making software as reliable as the sunrise.",
     ),
-    sections = [
+    sections=[
         Section(
             title="Experience",
             entries=[
@@ -30,7 +40,7 @@ resume = Resume(
                         [
                             "Building reliability improvements into the storage and replication layers of Cosmos DB.",
                             "Technical lead for a team of engineers, ramping them up on distributed systems and database concepts as well as preparing them for incident response.",
-                        ]
+                        ],
                     ),
                 ),
                 SectionEntry(
@@ -40,8 +50,8 @@ resume = Resume(
                     dates="May 2022 - February 2023",
                     description=BulletedList(
                         [
-                            "Managed reliable operation of Kubernetes and Yugabyte database clusters across AWS and GCP for the Yugabyte Managed product."
-                        ]
+                            "Managed reliable operation of Kubernetes and Yugabyte database clusters across AWS and GCP for the Yugabyte Managed product.",
+                        ],
                     ),
                 ),
                 SectionEntry(
@@ -53,7 +63,7 @@ resume = Resume(
                         [
                             "Worked as a technical lead for a petabyte-scale, globally distributed database. Reduced number of production incidents by 80%.",
                             'Founded a team that built a Python microservice that would perform real-time root cause analysis/mitigation of incidents and eliminate the need for an on-call engineer. Open sourced this work on Github as <a class="open-link" target="_blank" href="http://github.com/microsoft/jupyrest">Jupyrest</a>',
-                        ]
+                        ],
                     ),
                 ),
                 SectionEntry(
@@ -73,7 +83,7 @@ resume = Resume(
                     caption="Software Engineering Intern",
                     location="Concord, Massachusetts",
                     dates="May 2015 - August 2015",
-                )
+                ),
             ],
         ),
         Section(
@@ -115,7 +125,11 @@ resume = Resume(
                         url="https://www.pyohio.org/2023/speakers/koushik-krishnan/",
                         show_icon=True,
                     ),
-                    caption=LinkText('Serverless Jupyter Notebook Functions (YouTube)', url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5", show_icon=True),
+                    caption=LinkText(
+                        "Serverless Jupyter Notebook Functions (YouTube)",
+                        url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5",
+                        show_icon=True,
+                    ),
                     location="Virtual",
                     dates="December 2023",
                 ),
@@ -125,7 +139,11 @@ resume = Resume(
                         url="https://seattle2023.pydata.org/cfp/talk/K8KV8M/",
                         show_icon=True,
                     ),
-                    caption=LinkText('Notebooks as Serverless Functions (YouTube)', url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5", show_icon=True),
+                    caption=LinkText(
+                        "Notebooks as Serverless Functions (YouTube)",
+                        url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5",
+                        show_icon=True,
+                    ),
                     location="Seattle, WA",
                     dates="April 2023",
                 ),
@@ -136,7 +154,9 @@ resume = Resume(
             entries=[
                 SectionEntry(
                     title=LinkText(
-                        "ASHA Chennai", url="https://chennai.ashanet.org/", show_icon=True
+                        "ASHA Chennai",
+                        url="https://chennai.ashanet.org/",
+                        show_icon=True,
                     ),
                     caption="Spoken English Teacher",
                     location="Remote",
@@ -144,9 +164,9 @@ resume = Resume(
                     description=BulletedList(
                         [
                             "Created a curriculum with story-telling, skits, and friendly debates to provide disadvantaged children isolated in quarantine a fun way to learn spoken English.",
-                        ]
+                        ],
                     ),
-                )
+                ),
             ],
         ),
         Section(
@@ -157,9 +177,9 @@ resume = Resume(
                     location="Atlanta, Georgia",
                     dates="August 2014 - May 2018",
                     description=ItalicsText(
-                        "Bachelors of Science in Computer Science and Mathematics"
+                        "Bachelors of Science in Computer Science and Mathematics",
                     ),
-                )
+                ),
             ],
         ),
         Section(
@@ -176,12 +196,12 @@ resume = Resume(
                                 UnderlinedText("Tools:"),
                                 " Kubernetes, PostgreSQL, Linux, Windows, Azure Service Fabric, Distributed Databases, Storage Engines, Docker",
                             ),
-                        ]
-                    )
+                        ],
+                    ),
                 ),
             ],
         ),
-    ]
+    ],
 )
 
 if __name__ == "__main__":

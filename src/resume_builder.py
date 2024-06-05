@@ -1,6 +1,7 @@
-from textwrap import dedent
-from typing import Optional, List, Union
 import argparse
+from textwrap import dedent
+from typing import List, Optional, Union
+
 
 class Text:
     def __init__(self, text: str) -> None:
@@ -54,12 +55,14 @@ class UnderlinedText(Text):
     def __str__(self) -> str:
         return f'<span class="label">{self.text}</span>'
 
+
 class BoldText(Text):
     def __init__(self, text: str) -> None:
         super().__init__(text)
 
     def __str__(self) -> str:
-        return f'<strong>{self.text}</strong>'
+        return f"<strong>{self.text}</strong>"
+
 
 class ConcatText(Text):
     def __init__(self, *args: StrLike) -> None:
@@ -133,8 +136,7 @@ class Resume:
         </div>
         </body>
         </html>
-        """
-        )
+        """)
 
     def render_contact_info(self) -> str:
         contact_info = f'<h1 id="name">{self.contact_info.name}</h1>\n'
@@ -154,7 +156,7 @@ class Resume:
         if section.title:
             section_html += f"<h2>{section.title}</h2>\n"
         for entry in section.entries:
-            section_html += f'<div class="entry">\n'
+            section_html += '<div class="entry">\n'
             if entry.title:
                 section_html += f"<h3>{entry.title}</h3>\n"
             if entry.caption:
