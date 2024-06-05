@@ -1,8 +1,12 @@
 {
-    "autoDocstring.docstringFormat": "google",
-    "autoDocstring.includeName": false,
-    "autoDocstring.startOnNewLine": true,
-    "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff"
-    }
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "autoDocstring.docstringFormat": "google",
+  "autoDocstring.includeName": false,
+  "autoDocstring.startOnNewLine": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.editorAssociations": {
+    "html": "cweijan.htmlViewer"
+  }
 }
