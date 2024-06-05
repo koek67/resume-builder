@@ -23,3 +23,11 @@ packages = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
+fixable = ["ALL"]
+ignore = ["ANN101"]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
