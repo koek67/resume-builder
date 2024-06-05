@@ -392,12 +392,14 @@ class Resume:
         s = s.replace("__CONTACT_INFO__", self.render_contact_info())
         return s.replace("__SECTIONS__", self.render_sections())
 
-    def save(self, filename: str) -> None:
+    def save(self, filename: str | None = None) -> None:
         """Save the resume to a file.
 
         Args:
-            filename (str): The name of generated resume file.
-        """
+            filename (str | None, optional): The name of generated resume file. Defaults to `NAME_resume.html`.
+        """  # noqa: E501
+        if filename is None:
+            filename = f"{self.contact_info.name}_resume.html"
         with Path(filename).open("w") as f:
             f.write(self.render())
 
