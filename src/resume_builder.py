@@ -1,13 +1,32 @@
+"""Resume builder."""
+
+from __future__ import annotations
+
 import argparse
+from pathlib import Path
 from textwrap import dedent
-from typing import List, Optional, Union
+from typing import Optional, Union
 
 
 class Text:
+    """Represents plain text element in the resume."""
+
     def __init__(self, text: str) -> None:
+        """Initialize the text object.
+
+        Args:
+            text (str): The text to display
+
+        """
         self.text = text
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: the text
+
+        """
         return self.text
 
 
@@ -16,23 +35,59 @@ OptionalStrLike = Optional[StrLike]
 
 
 class LinkText(Text):
-    def __init__(self, text: str, url: str, show_icon: bool = False) -> None:
+    """Represents a text element with hyperlink.
+
+    Args:
+    ----
+        Text (Text): Inherit Text class
+
+    """
+
+    def __init__(self, text: str, url: str, *, show_icon: bool = False) -> None:
+        """Initialize Hyperlink text.
+
+        Args:
+            text (str): Plain text
+            url (str): Link URL
+            show_icon (bool, optional): Show link icon? Defaults to False.
+        """
         super().__init__(text)
         self.url = url
         self.show_icon = show_icon
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with hyperlink
+        """
         if not self.show_icon:
             return f'<a target="_blank" href="{self.url}">{self.text}</a>'
-        else:
-            return f'<a target="_blank" class="open-link" href="{self.url}">{self.text}</a>'
+
+        return f'<a target="_blank" class="open-link" href="{self.url}">{self.text}</a>'
 
 
 class BulletedList(Text):
-    def __init__(self, items: List[StrLike]) -> None:
+    """Represents a bulleted list of items.
+
+    Args:
+        Text (Text): Inherit Text class
+    """
+
+    def __init__(self, items: list[StrLike]) -> None:
+        """Initialize the bulleted list.
+
+        Args:
+            items (List[StrLike]): List of strings to display as bulleted list
+        """
         self.items = items
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with bulleted list.
+        """
         s = "<ul>\n"
         for item in self.items:
             s += f"<li><p>{item}</p></li>\n"
@@ -41,39 +96,105 @@ class BulletedList(Text):
 
 
 class ItalicsText(Text):
+    """Represents italicized text.
+
+    Args:
+        Text (Text): Inherit Text class
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the italicized text.
+
+        Args:
+            text (str): The text to display in italics.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with italicized text.
+        """
         return f'<p class="des">{self.text}</p>'
 
 
 class UnderlinedText(Text):
+    """Represents underlined text.
+
+    Args:
+        Text (Text): Inherit Text class
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the underlined text.
+
+        Args:
+            text (str): The text to display with underline.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with underlined text.
+        """
         return f'<span class="label">{self.text}</span>'
 
 
 class BoldText(Text):
+    """Represents bold text.
+
+    Args:
+        Text (Text): Inherit Text class
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the bold text.
+
+        Args:
+            text (str): The text to display in bold.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with bold text.
+        """
         return f"<strong>{self.text}</strong>"
 
 
 class ConcatText(Text):
+    """Represents concatenated text.
+
+    Args:
+        Text (Text): Inherit Text class
+    """
+
     def __init__(self, *args: StrLike) -> None:
+        """Initialize the concatenated text.
+
+        Args:
+            *args (StrLike): The texts to concatenate.
+        """
         self.args = args
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns concatenated string.
+        """
         return "".join(map(str, self.args))
 
 
 class SectionEntry:
-    def __init__(
+    """Represents an entry in a section of the resume."""
+
+    def __init__(  # noqa: PLR0913
         self,
         title: OptionalStrLike = None,
         caption: OptionalStrLike = None,
@@ -81,6 +202,15 @@ class SectionEntry:
         dates: OptionalStrLike = None,
         description: OptionalStrLike = None,
     ) -> None:
+        """Initialize the section entry.
+
+        Args:
+            title (OptionalStrLike, optional): The title of the entry. Defaults to None.
+            caption (OptionalStrLike, optional): The caption of the entry. Defaults to None.
+            location (OptionalStrLike, optional): The location of the entry. Defaults to None.
+            dates (OptionalStrLike, optional): The dates of the entry. Defaults to None.
+            description (OptionalStrLike, optional): The description of the entry. Defaults to None.
+        """  # noqa: E501
         self.title = title
         self.caption = caption
         self.location = location
@@ -89,25 +219,50 @@ class SectionEntry:
 
 
 class Section:
-    def __init__(self, title: StrLike, entries: List[SectionEntry]) -> None:
+    """Represents a section in the resume."""
+
+    def __init__(self, title: StrLike, entries: list[SectionEntry]) -> None:
+        """Initialize the section.
+
+        Args:
+            title (StrLike): The title of the section.
+            entries (list[SectionEntry]): The entries in the section.
+        """
         self.title = title
         self.entries = entries
 
 
 class ContactInfo:
+    """Represents the contact information in the resume."""
+
     def __init__(
         self,
         name: StrLike,
-        details: Optional[List[StrLike]] = None,
+        details: list[StrLike] | None = None,
         tag_line: OptionalStrLike = None,
     ) -> None:
+        """Initialize the contact information.
+
+        Args:
+            name (StrLike): The name of the person.
+            details (Optional[list[StrLike]], optional): The details of the person. Defaults to None.
+            tag_line (OptionalStrLike, optional): The tag line of the person. Defaults to None.
+        """  # noqa: E501
         self.name = name
         self.details = details
         self.tag_line = tag_line
 
 
 class Resume:
-    def __init__(self, contact_info: ContactInfo, sections: List[Section]) -> None:
+    """Represents entire resume document."""
+
+    def __init__(self, contact_info: ContactInfo, sections: list[Section]) -> None:
+        """Initialize the resume.
+
+        Args:
+            contact_info (ContactInfo): The contact information.
+            sections (list[Section]): The sections in the resume.
+        """
         self.contact_info = contact_info
         self.sections = sections
         self.TEMPLATE = dedent("""
@@ -136,9 +291,14 @@ class Resume:
         </div>
         </body>
         </html>
-        """)
+        """)  # noqa: E501
 
     def render_contact_info(self) -> str:
+        """Renders the contact information.
+
+        Returns:
+            str: returns HTML string with contact information.
+        """
         contact_info = f'<h1 id="name">{self.contact_info.name}</h1>\n'
 
         if self.contact_info.details:
@@ -151,6 +311,14 @@ class Resume:
         return contact_info
 
     def render_section(self, section: Section) -> str:
+        """Renders the section.
+
+        Args:
+            section (Section): The section to render.
+
+        Returns:
+            str: returns HTML string with section.
+        """
         section_html = "<div class='container'>\n"
         section_html += "<section>\n"
         if section.title:
@@ -173,22 +341,40 @@ class Resume:
         return section_html
 
     def render_sections(self) -> str:
+        """Renders all the sections in the resume.
+
+        Returns:
+            str: returns HTML string with all sections.
+        """
         sections_html = ""
         for section in self.sections:
             sections_html += self.render_section(section)
         return sections_html
 
     def render(self) -> str:
+        """Renders the entire resume.
+
+        Returns:
+            str: returns HTML string with entire resume.
+        """
         s = self.TEMPLATE.replace("__NAME__", str(self.contact_info.name))
         s = s.replace("__CONTACT_INFO__", self.render_contact_info())
-        s = s.replace("__SECTIONS__", self.render_sections())
-        return s
+        return s.replace("__SECTIONS__", self.render_sections())
 
     def save(self, filename: str) -> None:
-        with open(filename, "w") as f:
+        """Save the resume to a file.
+
+        Args:
+            filename (str): The name of generated resume file.
+        """
+        with Path(filename).open("w") as f:
             f.write(self.render())
 
-    def cli_main(self):
+    def cli_main(self) -> None:
+        """Command line interface for the resume builder.
+
+        Parses command line arguments for the output file name & calls the `save` method to save the resume to the file.
+        """  # noqa: E501
         parser = argparse.ArgumentParser(description="ResumeBuilder")
         parser.add_argument(
             "-o",
