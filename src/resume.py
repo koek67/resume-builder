@@ -1,4 +1,7 @@
-# Koushik Krishnan's Resume
+"""Resume Data.
+
+Add your resume details here.
+"""
 
 from resume_builder import (
     BulletedList,
