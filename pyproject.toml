@@ -19,7 +19,7 @@ dev-dependencies = ["ruff>=0.4.7"]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/resume_builder"]
+packages = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
