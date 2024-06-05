@@ -1,6 +1,10 @@
 {
     "recommendations": [
+        "charliermarsh.ruff",
         "cweijan.vscode-office",
-        "njpwerner.autodocstring"
+        "eamodio.gitlens",
+        "ms-python.python",
+        "njpwerner.autodocstring",
+        "tamasfe.even-better-toml",
     ]
 }
