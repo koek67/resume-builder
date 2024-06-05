@@ -1,0 +1,14 @@
+{
+  "name": "Python 3",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
+  "features": {
+    "ghcr.io/schlich/devcontainer-features/rye:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "cweijan.vscode-office"
+      ]
+    }
+  }
+}
