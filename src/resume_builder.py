@@ -1,6 +1,7 @@
-from textwrap import dedent
-from typing import Optional, List, Union
 import argparse
+from textwrap import dedent
+from typing import List, Optional, Union
+
 
 
 class Text:
@@ -154,8 +155,7 @@ class Resume:
         </div>
         </body>
         </html>
-        """
-        )
+        """)
 
     def render_contact_info(self) -> str:
         contact_info = f'<h1 id="name">{self.contact_info.name}</h1>\n'
