@@ -1,0 +1,8 @@
+{
+    "autoDocstring.docstringFormat": "google",
+    "autoDocstring.includeName": false,
+    "autoDocstring.startOnNewLine": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    }
+}
