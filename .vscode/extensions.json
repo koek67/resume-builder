@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "cweijan.vscode-office"
+        "cweijan.vscode-office",
+        "njpwerner.autodocstring"
     ]
 }
