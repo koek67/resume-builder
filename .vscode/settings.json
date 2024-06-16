@@ -6,6 +6,7 @@
   "autoDocstring.includeName": false,
   "autoDocstring.startOnNewLine": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "python.analysis.extraPaths": ["./src"],
   "workbench.editorAssociations": {
     "html": "cweijan.htmlViewer"
   }
