@@ -2,6 +2,7 @@ from textwrap import dedent
 from typing import Optional, List, Union
 import argparse
 
+
 class Text:
     def __init__(self, text: str) -> None:
         self.text = text
@@ -44,7 +45,7 @@ class ItalicsText(Text):
         super().__init__(text)
 
     def __str__(self) -> str:
-        return f'<p class="des">{self.text}</p>'
+        return f"<i>{self.text}</i>"
 
 
 class UnderlinedText(Text):
@@ -54,12 +55,14 @@ class UnderlinedText(Text):
     def __str__(self) -> str:
         return f'<span class="label">{self.text}</span>'
 
+
 class BoldText(Text):
     def __init__(self, text: str) -> None:
         super().__init__(text)
 
     def __str__(self) -> str:
-        return f'<strong>{self.text}</strong>'
+        return f"<strong>{self.text}</strong>"
+
 
 class ConcatText(Text):
     def __init__(self, *args: StrLike) -> None:
@@ -107,7 +110,8 @@ class Resume:
     def __init__(self, contact_info: ContactInfo, sections: List[Section]) -> None:
         self.contact_info = contact_info
         self.sections = sections
-        self.TEMPLATE = dedent("""
+        self.TEMPLATE = dedent(
+            """
         <!DOCTYPE html>
         <html>
         <head>
