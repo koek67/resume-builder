@@ -1,6 +1,16 @@
 # Koushik Krishnan's Resume
 
-from resume_builder import Resume, Section, SectionEntry, ContactInfo, ConcatText, ItalicsText, UnderlinedText, LinkText, BulletedList
+from resume_builder import (
+    Resume,
+    Section,
+    SectionEntry,
+    ContactInfo,
+    ConcatText,
+    ItalicsText,
+    UnderlinedText,
+    LinkText,
+    BulletedList,
+)
 
 resume = Resume(
     contact_info=ContactInfo(
@@ -17,7 +27,7 @@ resume = Resume(
         ],
         tag_line="Making software as reliable as the sunrise.",
     ),
-    sections = [
+    sections=[
         Section(
             title="Experience",
             entries=[
@@ -73,7 +83,7 @@ resume = Resume(
                     caption="Software Engineering Intern",
                     location="Concord, Massachusetts",
                     dates="May 2015 - August 2015",
-                )
+                ),
             ],
         ),
         Section(
@@ -115,7 +125,11 @@ resume = Resume(
                         url="https://www.pyohio.org/2023/speakers/koushik-krishnan/",
                         show_icon=True,
                     ),
-                    caption=LinkText('Serverless Jupyter Notebook Functions (YouTube)', url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5", show_icon=True),
+                    caption=LinkText(
+                        "Serverless Jupyter Notebook Functions (YouTube)",
+                        url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5",
+                        show_icon=True,
+                    ),
                     location="Virtual",
                     dates="December 2023",
                 ),
@@ -125,7 +139,11 @@ resume = Resume(
                         url="https://seattle2023.pydata.org/cfp/talk/K8KV8M/",
                         show_icon=True,
                     ),
-                    caption=LinkText('Notebooks as Serverless Functions (YouTube)', url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5", show_icon=True),
+                    caption=LinkText(
+                        "Notebooks as Serverless Functions (YouTube)",
+                        url="https://youtu.be/hoGJ0c3jIeo?si=srbRtjSxOxETFWN5",
+                        show_icon=True,
+                    ),
                     location="Seattle, WA",
                     dates="April 2023",
                 ),
@@ -136,7 +154,9 @@ resume = Resume(
             entries=[
                 SectionEntry(
                     title=LinkText(
-                        "ASHA Chennai", url="https://chennai.ashanet.org/", show_icon=True
+                        "ASHA Chennai",
+                        url="https://chennai.ashanet.org/",
+                        show_icon=True,
                     ),
                     caption="Spoken English Teacher",
                     location="Remote",
@@ -181,7 +201,7 @@ resume = Resume(
                 ),
             ],
         ),
-    ]
+    ],
 )
 
 if __name__ == "__main__":
