@@ -106,9 +106,23 @@ class ContactInfo:
         self.tag_line = tag_line
 
 
+class Summary:
+    def __init__(
+        self, title: OptionalStrLike = None, description: OptionalStrLike = None
+    ) -> None:
+        self.title = title
+        self.description = description
+
+
 class Resume:
-    def __init__(self, contact_info: ContactInfo, sections: List[Section]) -> None:
+    def __init__(
+        self,
+        contact_info: ContactInfo,
+        summary: Summary | None,
+        sections: List[Section],
+    ) -> None:
         self.contact_info = contact_info
+        self.summary = summary
         self.sections = sections
         self.TEMPLATE = dedent(
             """
@@ -133,6 +147,9 @@ class Resume:
         __CONTACT_INFO__
         </header>
         <div class="container">
+        __SUMMARY__
+        </div>
+        <div class="container">
         __SECTIONS__
         </div>
         </body>
@@ -154,13 +171,28 @@ class Resume:
             contact_info += '<br>\n'
         return contact_info
 
+    def render_summary(self) -> str:
+        if not self.summary:
+            return ""
+
+        summary_html = "<div class='container'>\n"
+        summary_html += "<section>\n"
+        summary_html += f"<h2>{self.summary.title}</h2>\n"
+        summary_html += '<div class="entry">\n'
+        summary_html += f"<p>\n{self.summary.description}</p>\n"
+        summary_html += "</div>"
+        summary_html += "</section>\n"
+        summary_html += "</div>\n"
+
+        return summary_html
+
     def render_section(self, section: Section) -> str:
         section_html = "<div class='container'>\n"
         section_html += "<section>\n"
         if section.title:
             section_html += f"<h2>{section.title}</h2>\n"
         for entry in section.entries:
-            section_html += f'<div class="entry">\n'
+            section_html += '<div class="entry">\n'
             if entry.title:
                 section_html += f"<h3>{entry.title}</h3>\n"
             if entry.caption:
@@ -185,6 +217,7 @@ class Resume:
     def render(self) -> str:
         s = self.TEMPLATE.replace("__NAME__", str(self.contact_info.name))
         s = s.replace("__CONTACT_INFO__", self.render_contact_info())
+        s = s.replace("__SUMMARY__", self.render_summary())
         s = s.replace("__SECTIONS__", self.render_sections())
         return s
 
