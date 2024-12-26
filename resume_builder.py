@@ -150,6 +150,8 @@ class Resume:
             contact_info += "</ul>\n"
         if self.contact_info.tag_line:
             contact_info += f'<p id="objective">{self.contact_info.tag_line}</p>\n'
+        else:
+            contact_info += '<br>\n'
         return contact_info
 
     def render_section(self, section: Section) -> str:
