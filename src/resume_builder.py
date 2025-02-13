@@ -253,6 +253,14 @@ class ContactInfo:
         self.tag_line = tag_line
 
 
+class Summary:
+    def __init__(
+        self, title: OptionalStrLike = None, description: OptionalStrLike = None
+    ) -> None:
+        self.title = title
+        self.description = description
+
+
 class Resume:
     """Represents entire resume document."""
 
@@ -264,8 +272,10 @@ class Resume:
             sections (list[Section]): The sections in the resume.
         """
         self.contact_info = contact_info
+        self.summary = summary
         self.sections = sections
-        self.TEMPLATE = dedent("""
+        self.TEMPLATE = dedent(
+            """
         <!DOCTYPE html>
         <html>
         <head>
@@ -286,6 +296,9 @@ class Resume:
         <header>
         __CONTACT_INFO__
         </header>
+        <div class="container">
+        __SUMMARY__
+        </div>
         <div class="container">
         __SECTIONS__
         </div>
@@ -308,7 +321,24 @@ class Resume:
             contact_info += "</ul>\n"
         if self.contact_info.tag_line:
             contact_info += f'<p id="objective">{self.contact_info.tag_line}</p>\n'
+        else:
+            contact_info += '<br>\n'
         return contact_info
+
+    def render_summary(self) -> str:
+        if not self.summary:
+            return ""
+
+        summary_html = "<div class='container'>\n"
+        summary_html += "<section>\n"
+        summary_html += f"<h2>{self.summary.title}</h2>\n"
+        summary_html += '<div class="entry">\n'
+        summary_html += f"<p>\n{self.summary.description}</p>\n"
+        summary_html += "</div>"
+        summary_html += "</section>\n"
+        summary_html += "</div>\n"
+
+        return summary_html
 
     def render_section(self, section: Section) -> str:
         """Renders the section.
