@@ -14,11 +14,13 @@ APPLY_FIXES: all
 # default
 # ENABLE_LINTERS:
 
+ADDITIONAL_EXCLUDED_DIRECTORIES:
+  - examples
+
 # DISABLE:
-  # - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
-  # - SPELL # Uncomment to disable checks of spelling mistakes
+#   - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
+#   - SPELL # Uncomment to disable checks of spelling mistakes
 
 SHOW_ELAPSED_TIME: true
-
 # Uncomment if you want MegaLinter to detect errors but not block CI to pass
 # DISABLE_ERRORS: true
