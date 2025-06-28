@@ -22,7 +22,7 @@ See the example resume definition [examples/resume.py](./examples/resume.py) and
 ### Python method
 
 1. Install [Python](https://www.python.org/downloads/)
-2. Download [`resume.py`](src/resume.py) & [`resume_builder.py`](src/resume_builder.py)
+2. Download [`resume.py`](examples/resume.py) & [`resume_builder.py`](src/resume_builder.py)
 3. Proceed to [Usage section](#usage)
 
 ### Installing the package
