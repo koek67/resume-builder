@@ -2,12 +2,18 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
   "autoDocstring.docstringFormat": "google",
   "autoDocstring.includeName": false,
   "autoDocstring.startOnNewLine": true,
+  "conventionalCommits.scopes": [
+    "cspell",
+    "devcontainer",
+    "megalinter",
+    "vscode"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "python.analysis.extraPaths": ["./src"],
-  "workbench.editorAssociations": {
-    "html": "cweijan.htmlViewer"
-  }
+  "python.analysis.extraPaths": ["./src"]
 }
