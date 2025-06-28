@@ -1,0 +1,79 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build package",
+      "type": "shell",
+      "command": "uv build",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Lint code",
+      "type": "shell",
+      "command": "uv run ruff check",
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Format code",
+      "type": "shell",
+      "command": "uv run ruff format",
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Lint and Format",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Format code", "Lint code"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Test package",
+      "type": "shell",
+      "command": "uv run python -c \"import resume_builder; print('Package imports successfully'); print('Version:', resume_builder.__version__)\"",
+      "problemMatcher": [],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Generate example resume",
+      "type": "shell",
+      "command": "uv run python -c \"import sys; sys.path.append('examples'); from resume import resume; resume.save('generated_resume.html'); print('✅ Resume generated successfully as generated_resume.html')\"",
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}
