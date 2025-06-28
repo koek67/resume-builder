@@ -1,15 +1,16 @@
 {
-  "threshold": 0,
-  "reporters": ["html", "markdown"],
   "ignore": [
-    "**/node_modules/**",
     "**/.git/**",
-    "**/.rbenv/**",
-    "**/.venv/**",
-    "**/*cache*/**",
     "**/.github/**",
     "**/.idea/**",
-    "**/report/**",
-    "**/*.svg"
-  ]
+    "**/.rbenv/**",
+    "**/.venv/**",
+    "**/*.svg",
+    "**/*cache*/**",
+    "**/examples/**",
+    "**/node_modules/**",
+    "**/report/**"
+  ],
+  "reporters": ["html", "markdown"],
+  "threshold": 0
 }
