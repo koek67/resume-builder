@@ -15,6 +15,7 @@
   "noConfigSearch": true,
   "version": "0.2",
   "words": [
+    "asha",
     "bierner",
     "charliermarsh",
     "cweijan",
@@ -27,7 +28,10 @@
     "figcaption",
     "hgroup",
     "joshbolduc",
+    "jupyrest",
     "koek",
+    "koushik",
+    "krishnan",
     "matangover",
     "megalinter",
     "mrdgh",
@@ -41,6 +45,7 @@
     "spmeesseman",
     "tamasfe",
     "taskexplorer",
-    "vivaxy"
+    "vivaxy",
+    "yugabyte"
   ]
 }
