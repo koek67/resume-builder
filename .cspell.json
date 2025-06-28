@@ -1,4 +1,6 @@
 {
+  "allowCompoundWords": true,
+  "caseSensitive": false,
   "ignorePaths": [
     "**/node_modules/**",
     "**/vscode-extension/**",
@@ -11,6 +13,31 @@
   ],
   "language": "en",
   "noConfigSearch": true,
-  "words": ["megalinter", "oxsecurity"],
-  "version": "0.2"
+  "version": "0.2",
+  "words": [
+    "bierner",
+    "charliermarsh",
+    "cweijan",
+    "davidanson",
+    "devcontainers",
+    "dunder",
+    "eamodio",
+    "esbenp",
+    "evondev",
+    "figcaption",
+    "hgroup",
+    "joshbolduc",
+    "matangover",
+    "megalinter",
+    "mypy",
+    "njpwerner",
+    "oderwat",
+    "oxsecurity",
+    "rsquo",
+    "samp",
+    "spmeesseman",
+    "tamasfe",
+    "taskexplorer",
+    "vivaxy"
+  ]
 }
