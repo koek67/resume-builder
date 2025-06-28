@@ -2,38 +2,24 @@
 name = "resume-builder"
 version = "0.1.0"
 description = "A no nonsense tool to build resumes in pure Python."
-authors = [{ name = "MRDGH2821", email = "ask.mrdgh2821@outlook.com" }]
+authors = [
+    { name = "koek67", email = "krishnan.koushik@gmail.com" },
+    { name = "Samuel Hoover", email = "56448170+samuelhoover@users.noreply.github.com" },
+    { name = "MRDGH2821", email = "ask.mrdgh2821@outlook.com" },
+]
 dependencies = []
 readme = "README.md"
 requires-python = ">= 3.7"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.rye]
-managed = true
-dev-dependencies = ["ruff>=0.4.7"]
-
-[tool.rye.scripts]
-resume = "python src/resume.py"
-
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.hatch.build.targets.wheel]
-packages = ["src"]
+[dependency-groups]
+dev = ["ruff>=0.12.1"]
 
 [tool.ruff.lint]
 select = ["ALL"]
 fixable = ["ALL"]
-ignore = ["ANN101"]
 
 [tool.ruff.format]
 line-ending = "lf"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-[tool.ruff.lint.per-file-ignores]
-"resume.py" = ["E501"]
