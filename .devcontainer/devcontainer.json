@@ -2,21 +2,34 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "bierner.github-markdown-preview",
         "charliermarsh.ruff",
+        "cweijan.vscode-office",
         "davidanson.vscode-markdownlint",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
+        "evondev.indent-rainbow-palettes",
+        "joshbolduc.commitlint",
+        "matangover.mypy",
         "ms-python.python",
+        "ms-python.vscode-python-envs",
         "njpwerner.autodocstring",
-        "tamasfe.even-better-toml"
+        "oderwat.indent-rainbow",
+        "redhat.vscode-yaml",
+        "spmeesseman.vscode-taskexplorer",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml",
+        "vivaxy.vscode-conventional-commits"
       ]
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli": {},
-    "ghcr.io/joshuanianji/devcontainer-features/github-cli-persistence": {},
-    "ghcr.io/schlich/devcontainer-features/rye:1": {}
+    "ghcr.io/devcontainers-extra/features/npm-package": {
+      "package": "mega-linter-runner"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker": {},
+    "ghcr.io/va-h/devcontainers-features/uv": {}
   },
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
-  "name": "Python 3"
+  "image": "mcr.microsoft.com/devcontainers/python:latest",
+  "name": "Resume Builder"
 }
