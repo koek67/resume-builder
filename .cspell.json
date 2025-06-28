@@ -11,7 +11,7 @@
     "package-lock.json",
     "report"
   ],
-  "language": "en",
+  "language": "en,en-GB,en-AU",
   "noConfigSearch": true,
   "version": "0.2",
   "words": [
