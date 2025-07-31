@@ -477,6 +477,7 @@ class Resume:
         """
         s = self.TEMPLATE.replace("__NAME__", str(self.contact_info.name))
         s = s.replace("__CONTACT_INFO__", self.render_contact_info())
+        s = s.replace("__SUMMARY__", self.render_summary())
         return s.replace("__SECTIONS__", self.render_sections())
 
     def save(self, filename: str | None = None) -> None:
