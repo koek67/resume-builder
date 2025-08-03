@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "bierner.github-markdown-preview",
+    "charliermarsh.ruff",
+    "cweijan.vscode-office",
+    "davidanson.vscode-markdownlint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "evondev.indent-rainbow-palettes",
+    "joshbolduc.commitlint",
+    "matangover.mypy",
+    "ms-python.python",
+    "ms-python.vscode-python-envs",
+    "njpwerner.autodocstring",
+    "oderwat.indent-rainbow",
+    "redhat.vscode-yaml",
+    "spmeesseman.vscode-taskexplorer",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "vivaxy.vscode-conventional-commits"
+  ]
+}

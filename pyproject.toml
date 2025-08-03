@@ -1,0 +1,59 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[dependency-groups]
+dev = ["mypy>=1.4.1", "ruff>=0.12.1"]
+
+[project]
+authors = [
+    { email = "56448170+samuelhoover@users.noreply.github.com", name = "Samuel Hoover" },
+    { email = "ask.mrdgh2821@outlook.com", name = "MRDGH2821" },
+    { email = "krishnan.koushik@gmail.com", name = "koek67" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Topic :: Utilities",
+]
+dependencies = []
+description = "A no nonsense tool to build resumes in pure Python."
+keywords = ["builder", "cv", "generator", "html", "library", "resume"]
+license = "MIT"
+license-files = ["LICENCE.txt"]
+name = "resume-builder"
+readme = "README.md"
+requires-python = ">= 3.7"
+version = "0.1.0"
+
+[project.urls]
+Documentation = "https://github.com/koek67/resume-builder#readme"
+Homepage = "https://github.com/koek67/resume-builder"
+Issues = "https://github.com/koek67/resume-builder/issues"
+Repository = "https://github.com/koek67/resume-builder"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.build.targets.wheel.sources]
+src = "resume_builder"
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["ALL"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

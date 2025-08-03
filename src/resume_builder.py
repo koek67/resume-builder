@@ -1,38 +1,112 @@
-from textwrap import dedent
-from typing import Optional, List, Union
+"""Resume builder.
+
+This module provides functionalities to build and save a resume in HTML format.
+"""
+
+from __future__ import annotations
+
 import argparse
+from pathlib import Path
+from textwrap import dedent
+from typing import Optional, Union
 
 
 class Text:
+    """Represents a plain text element in the resume.
+
+    This class represents a plain text element in the resume. It has
+    the following attributes:
+
+    - `text` (str): The text content.
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the text object.
+
+        Args:
+            text (str): The text to display
+
+        """
         self.text = text
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: the text
+
+        """
         return self.text
 
 
 StrLike = Union[str, Text]
+"""This type alias represents a union type that can be either a string or a
+`Text` object."""
+
 OptionalStrLike = Optional[StrLike]
+"""This type alias represents an optional `StrLike` type, which can be either
+`None` or a `StrLike` value."""
 
 
 class LinkText(Text):
-    def __init__(self, text: str, url: str, show_icon: bool = False) -> None:
+    """Represents a text element with a hyperlink.
+
+    This class inherits from `Text` and represents a text element
+    with a hyperlink. It has the following attributes in addition to those
+    inherited from `Text`:
+
+    - `url` (str): The URL of the link.
+    - `show_icon` (bool, optional): A flag indicating whether to display an icon
+      next to the text (defaults to `False`).
+    """
+
+    def __init__(self, text: str, url: str, *, show_icon: bool = False) -> None:
+        """Initialize Hyperlink text.
+
+        Args:
+            text (str): Plain text
+            url (str): Link URL
+            show_icon (bool, optional): Show link icon? Defaults to False.
+        """
         super().__init__(text)
         self.url = url
         self.show_icon = show_icon
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with hyperlink
+        """
         if not self.show_icon:
             return f'<a target="_blank" href="{self.url}">{self.text}</a>'
-        else:
-            return f'<a target="_blank" class="open-link" href="{self.url}">{self.text}</a>'
+
+        return f'<a target="_blank" class="open-link" href="{self.url}">{self.text}</a>'
 
 
 class BulletedList(Text):
-    def __init__(self, items: List[StrLike]) -> None:
+    """Represents a bulleted list.
+
+    This class inherits from `Text` and represents a bulleted
+    list. It has the following attribute:
+
+    - `items` (List[StrLike]): A list of items in the bulleted list.
+    """
+
+    def __init__(self, items: list[StrLike]) -> None:
+        """Initialize the bulleted list.
+
+        Args:
+            items (List[StrLike]): List of strings to display as bulleted list
+        """
         self.items = items
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with bulleted list.
+        """
         s = "<ul>\n"
         for item in self.items:
             s += f"<li><p>{item}</p></li>\n"
@@ -41,38 +115,117 @@ class BulletedList(Text):
 
 
 class ItalicsText(Text):
+    """Represents italicized text.
+
+    This class inherits from `Text` and represents a text
+    element rendered in italics.
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the italicized text.
+
+        Args:
+            text (str): The text to display in italics.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
-        return f"<i>{self.text}</i>"
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with italicized text.
+        """
+        return f'<p class="des">{self.text}</p>'
 
 
 class UnderlinedText(Text):
+    """Represents underlined text.
+
+    This class inherits from `Text` and represents a text
+    element rendered with an underline.
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the underlined text.
+
+        Args:
+            text (str): The text to display with underline.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with underlined text.
+        """
         return f'<span class="label">{self.text}</span>'
 
 
 class BoldText(Text):
+    """Represents bold text.
+
+    This class inherits from `Text` and represents a text
+    element rendered in bold.
+    """
+
     def __init__(self, text: str) -> None:
+        """Initialize the bold text.
+
+        Args:
+            text (str): The text to display in bold.
+        """
         super().__init__(text)
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns HTML string with bold text.
+        """
         return f"<strong>{self.text}</strong>"
 
 
 class ConcatText(Text):
+    """Represents concatenated text.
+
+    This class inherits from `Text` and is used to concatenate
+    multiple text elements. It takes variable number of arguments of type
+    `StrLike`.
+    """
+
     def __init__(self, *args: StrLike) -> None:
+        """Initialize the concatenated text.
+
+        Args:
+            *args (StrLike): The texts to concatenate.
+        """
         self.args = args
 
     def __str__(self) -> str:
+        """Dunder string method.
+
+        Returns:
+            str: returns concatenated string.
+        """
         return "".join(map(str, self.args))
 
 
 class SectionEntry:
+    """Represents an entry in a resume section.
+
+    This class represents an entry in a resume section. It has
+    the following attributes:
+
+    - `title` (OptionalStrLike): The title of the entry, this would be the
+      company name.
+    - `caption` (OptionalStrLike): A caption for the entry (e.g., job title).
+    - `location` (OptionalStrLike): The location of the entry (e.g., Boston, MA).
+    - `dates` (OptionalStrLike): The dates associated with the entry (e.g.,
+      employment dates).
+    - `description` (OptionalStrLike): A description of the entry.
+    """
+
     def __init__(
         self,
         title: OptionalStrLike = None,
@@ -81,6 +234,15 @@ class SectionEntry:
         dates: OptionalStrLike = None,
         description: OptionalStrLike = None,
     ) -> None:
+        """Initialize the section entry.
+
+        Args:
+            title (OptionalStrLike, optional): The title of the entry. Defaults to None.
+            caption (OptionalStrLike, optional): The caption of the entry. Defaults to None.
+            location (OptionalStrLike, optional): The location of the entry. Defaults to None.
+            dates (OptionalStrLike, optional): The dates of the entry. Defaults to None.
+            description (OptionalStrLike, optional): The description of the entry. Defaults to None.
+        """  # noqa: E501
         self.title = title
         self.caption = caption
         self.location = location
@@ -89,38 +251,108 @@ class SectionEntry:
 
 
 class Section:
-    def __init__(self, title: StrLike, entries: List[SectionEntry]) -> None:
+    """Represents a section in the resume.
+
+    This class represents a section in the resume. It has the
+    following attributes:
+
+    - `title` (StrLike): The title of the section.
+    - `entries` (List[SectionEntry]): A list of entries in the section.
+    """
+
+    def __init__(self, title: StrLike, entries: list[SectionEntry]) -> None:
+        """Initialize the section.
+
+        Args:
+            title (StrLike): The title of the section.
+            entries (list[SectionEntry]): The entries in the section.
+        """
         self.title = title
         self.entries = entries
 
 
 class ContactInfo:
+    """Represents the contact information in the resume.
+
+    This class represents the contact information section of the
+    resume. It has the following attributes:
+
+    - `name` (StrLike): The name of the person.
+    - `details` (Optional[List[StrLike]]): A list of contact details (e.g.,
+      email, phone number).
+    - `tag_line` (OptionalStrLike): A tagline or objective statement.
+    """
+
     def __init__(
         self,
         name: StrLike,
-        details: Optional[List[StrLike]] = None,
+        details: list[StrLike] | None = None,
         tag_line: OptionalStrLike = None,
     ) -> None:
+        """Initialize the contact information.
+
+        Args:
+            name (StrLike): The name of the person.
+            details (Optional[list[StrLike]], optional): The details of the person. Defaults to None.
+            tag_line (OptionalStrLike, optional): The tag line of the person. Defaults to None.
+        """  # noqa: E501
         self.name = name
         self.details = details
         self.tag_line = tag_line
 
 
 class Summary:
+    """This class represents an introductory section.
+
+    This class represents an introductory section like a summary,
+    objective, research statement, etc. If you would like to omit a summary
+    section, simply set `Summary = None`. It has the following attributes:
+
+    - `title` (OptionalStrLike): The title of the summary section.
+    - `description` (OptionalStrLike): A description of the entry.
+    """
+
     def __init__(
-        self, title: OptionalStrLike = None, description: OptionalStrLike = None
+        self,
+        title: OptionalStrLike = None,
+        description: OptionalStrLike = None,
     ) -> None:
+        """Initialize the summary section.
+
+        Args:
+            title (OptionalStrLike, optional): The title of the summary section.
+                Defaults to None.
+            description (OptionalStrLike, optional): A description of the entry.
+                Defaults to None.
+        """
         self.title = title
         self.description = description
 
 
 class Resume:
+    """Represents the entire resume document.
+
+    This class represents the entire resume document. It has the
+    following attributes:
+
+    - `contact_info` (ContactInfo): The contact information section of the resume.
+    - `sections` (List[Section]): A list of sections in the resume.
+    - `summary` (Summary | None): The summary section, optional.
+    """
+
     def __init__(
         self,
         contact_info: ContactInfo,
-        summary: Summary | None,
-        sections: List[Section],
+        sections: list[Section],
+        summary: Summary | None = None,
     ) -> None:
+        """Initialize the resume.
+
+        Args:
+            contact_info (ContactInfo): The contact information.
+            sections (list[Section]): The sections in the resume.
+            summary (Summary | None, optional): The summary section. Defaults to None.
+        """
         self.contact_info = contact_info
         self.summary = summary
         self.sections = sections
@@ -154,10 +386,15 @@ class Resume:
         </div>
         </body>
         </html>
-        """
+        """,  # noqa: E501
         )
 
     def render_contact_info(self) -> str:
+        """Renders the contact information section of the resume in HTML format.
+
+        Returns:
+            str: returns HTML string with contact information.
+        """
         contact_info = f'<h1 id="name">{self.contact_info.name}</h1>\n'
 
         if self.contact_info.details:
@@ -168,10 +405,15 @@ class Resume:
         if self.contact_info.tag_line:
             contact_info += f'<p id="objective">{self.contact_info.tag_line}</p>\n'
         else:
-            contact_info += '<br>\n'
+            contact_info += "<br>\n"
         return contact_info
 
     def render_summary(self) -> str:
+        """Renders the summary section.
+
+        Returns:
+            str: returns HTML string with summary section.
+        """
         if not self.summary:
             return ""
 
@@ -187,6 +429,14 @@ class Resume:
         return summary_html
 
     def render_section(self, section: Section) -> str:
+        """Renders a single section of the resume in HTML format.
+
+        Args:
+            section (Section): The section to render.
+
+        Returns:
+            str: returns HTML string with section.
+        """
         section_html = "<div class='container'>\n"
         section_html += "<section>\n"
         if section.title:
@@ -209,31 +459,54 @@ class Resume:
         return section_html
 
     def render_sections(self) -> str:
+        """Renders all sections of the resume in HTML format.
+
+        Returns:
+            str: returns HTML string with all sections.
+        """
         sections_html = ""
         for section in self.sections:
             sections_html += self.render_section(section)
         return sections_html
 
     def render(self) -> str:
+        """Renders the entire resume in HTML format.
+
+        Returns:
+            str: returns HTML string with entire resume.
+        """
         s = self.TEMPLATE.replace("__NAME__", str(self.contact_info.name))
         s = s.replace("__CONTACT_INFO__", self.render_contact_info())
         s = s.replace("__SUMMARY__", self.render_summary())
-        s = s.replace("__SECTIONS__", self.render_sections())
-        return s
+        return s.replace("__SECTIONS__", self.render_sections())
 
-    def save(self, filename: str) -> None:
-        with open(filename, "w") as f:
+    def save(self, filename: str | None = None) -> None:
+        """Saves the rendered HTML content of the resume to a file.
+
+        Args:
+            filename (str | None, optional): The name of generated resume file.
+                Defaults to `NAME_resume.html`.
+        """
+        if filename is None:
+            filename = f"{self.contact_info.name}_resume.html"
+        with Path(filename).open("w") as f:
             f.write(self.render())
 
-    def cli_main(self):
+    def cli_main(self) -> None:
+        """Serves as the entry point for the command-line interface (CLI) functionality.
+
+        Parses command line arguments for the output file name & calls the
+        `save` method to save the resume to the file.
+        """
         parser = argparse.ArgumentParser(description="ResumeBuilder")
         parser.add_argument(
             "-o",
             "--output",
             type=str,
             dest="output_file",
-            required=True,
+            required=False,
             help="Output HTML file name.",
+            default=f"{self.contact_info.name}_resume.html",
         )
         args = parser.parse_args()
         self.save(args.output_file)
