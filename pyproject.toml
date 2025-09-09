@@ -42,8 +42,12 @@ urls.Repository = "https://github.com/koek67/resume-builder"
 [dependency-groups]
 dev = ["mypy>=1.4.1", "ruff>=0.12.1"]
 
+[tool.hatch.build]
+dev-mode-dirs = ["."]
+only-include = ["LICENCE.txt", "README.md", "pyproject.toml", "src"]
 
 [tool.hatch.build.targets.wheel]
+include = ["src/py.typed"]
 packages = ["src"]
 
 [tool.hatch.build.targets.wheel.sources]
