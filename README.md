@@ -36,7 +36,7 @@ See the example resume definition [examples/resume.py](./examples/resume.py) and
    OR
 
    ```bash
-   uv add https://github.com/koek67/resume-builder
+   uv add git+https://github.com/koek67/resume-builder
    ```
 
 2. Proceed to [Usage section](#usage)
