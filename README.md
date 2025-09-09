@@ -30,7 +30,13 @@ See the example resume definition [examples/resume.py](./examples/resume.py) and
 1. Install this package
 
    ```bash
-   pip install resume-builder
+   pip install git+https://github.com/koek67/resume-builder.git
+   ```
+
+   OR
+
+   ```bash
+   uv add https://github.com/koek67/resume-builder
    ```
 
 2. Proceed to [Usage section](#usage)
