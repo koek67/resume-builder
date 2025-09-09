@@ -1,6 +1,7 @@
 include README.md
 include LICENCE.txt
 include pyproject.toml
+include src/py.typed
 recursive-include src *.py
 global-exclude __pycache__
 global-exclude *.py[cod]
